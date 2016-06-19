@@ -11,8 +11,8 @@ export class Board {
      */
     private data:boolean[];
 
-    constructor(public width:number, public heigth:number) {
-        this.data = new Array<boolean>(this.width * this.heigth);
+    constructor(public width:number, public height:number) {
+        this.data = new Array<boolean>(this.width * this.height);
         this.data.fill(false);
     }
 
@@ -24,7 +24,7 @@ export class Board {
     }
 
     getSize():number {
-        return this.width * this.heigth;
+        return this.width * this.height;
     }
 
     /** 
@@ -57,11 +57,20 @@ export class Board {
         return neighbors;
     }
 
+    getNumberOfAliveCells():number {
+        return this.data.filter(cell => cell).length;
+    }
+
     getAllCells():Cell[] {
         let allCells = [];
         for (let x = 0; x < this.width; x++) {
-            for (let y = 0; y < this.heigth; y ++) {
-                allCells.push({ 'x': x, 'y': y, 'alive': this.getCell(x, y)})
+            for (let y = 0; y < this.height; y ++) {
+                allCells.push({ 
+                    'index': this.getIndex(x,y),
+                    'x': x, 
+                    'y': y, 
+                    'alive': this.getCell(x, y)
+                })
             }
         }
         return allCells;
@@ -74,7 +83,7 @@ export class Board {
     createNextGeneration():Board {
         let nextGeneration = this.clone();
         for (let x = 0; x < this.width; x++) {
-            for (let y = 0; y < this.heigth; y ++) {
+            for (let y = 0; y < this.height; y ++) {
                 let cellAlive = this.getCell(x,y);
                 let neighbors = this.getAliveNeighborCells(x, y);
                 if (cellAlive) {
@@ -101,7 +110,7 @@ export class Board {
      * Creates an exact deep copy of this board.
      */
     clone():Board {
-        let clone = new Board(this.width, this.heigth);
+        let clone = new Board(this.width, this.height);
         clone.setData(this.data.slice(0));
         return clone;
     }
@@ -120,7 +129,7 @@ export class Board {
      */
     private getIndex(x:number, y:number):number {
         let modX = this.getFlippedCoordinate(x, this.width, 'x');
-        let modY = this.getFlippedCoordinate(y, this.heigth, 'y');
+        let modY = this.getFlippedCoordinate(y, this.height, 'y');
         return modY * this.width + modX;
     }
 

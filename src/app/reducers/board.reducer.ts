@@ -7,12 +7,15 @@ export const TOGGLE_CELL = 'TOGGLE_CELL'; // x, y
 export const NEXT_GENERATION = 'NEXT_GENERATION'; // no params
 export const POPULATE = 'POPULATE'; // density: number between 0 and 1
 
-export const boardReducer: ActionReducer<Board> = (state: Board = new Board(50, 30), action: Action) => {
+// empty 50*30 board
+const DEFAULT_BOARD = new Board(50,30);
+
+export const boardReducer: ActionReducer<Board> = (state: Board = DEFAULT_BOARD.clone(), action: Action) => {
 
     switch (action.type) {
 
         case POPULATE: {
-            let board = new Board(50, 30);
+            let board = DEFAULT_BOARD.clone();
             for (let x = 0; x < 50; x++) {
                 for (let y = 0; y < 30; y++) {
                     board.setCell(x, y, Math.random() < action.payload.density);
@@ -31,10 +34,9 @@ export const boardReducer: ActionReducer<Board> = (state: Board = new Board(50, 
         }
 
         case RESET:
-            return new Board(50, 30);
+            return DEFAULT_BOARD.clone();
 
         default:
-            console.warn("default hit");
             return state;
     }
 }

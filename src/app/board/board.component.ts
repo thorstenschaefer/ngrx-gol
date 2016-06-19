@@ -9,7 +9,7 @@ import { Board, Cell } from '../model/board';
   selector: 'app-board',
   templateUrl: 'board.component.html',
   styleUrls: ['board.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BoardComponent implements OnInit {
 
@@ -18,19 +18,32 @@ export class BoardComponent implements OnInit {
 
   @Output()
   clickedCell = new EventEmitter<Cell>();
+  
   size = 15;
 
+
+  b:Board;
+
+  private dimensions:Observable<any>;
+
   constructor() {
-    // this.board = new Board(50, 30);
-    // this.board.setCell(5,5,true);
   }
 
   onClick(cell:Cell) {
-    console.log('emmiting ', cell);
     this.clickedCell.emit(cell);
   }
 
+//      [class.alive]="(board | async).getCell(cell.x, cell.y)"
+
+
   ngOnInit() {
+    this.dimensions = this.board
+      .distinctUntilChanged((board1, board2) => board1.height == board2.height && board1.width == board2.width);
+
+    this.board.subscribe(board => this.b = board);
+
+    this.dimensions.subscribe(dim => console.log('dim changed', dim));
+
   }
 
 }

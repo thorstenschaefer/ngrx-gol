@@ -1,9 +1,13 @@
 <h1>
-  {{title}}
+  Game of Life
 </h1>
+
+<div>
+Number of cells: {{ (board$ | async).getNumberOfAliveCells()}}
 
 <button (click)="resetBoard()">Reset</button>
 <button (click)="createNextGeneration()">Next Generation</button>
 <button (click)="populate()">Populate</button>
+</div>
 
 <app-board [board]="board$" (clickedCell)="handleCellSelection($event)"></app-board>
