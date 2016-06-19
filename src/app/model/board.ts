@@ -11,7 +11,7 @@ export class Board {
      */
     private data:boolean[];
 
-    constructor(private width:number, private heigth:number) {
+    constructor(public width:number, public heigth:number) {
         this.data = new Array<boolean>(this.width * this.heigth);
         this.data.fill(false);
     }
@@ -23,6 +23,17 @@ export class Board {
         this.data[this.getIndex(x,y)] = value;
     }
 
+    getSize():number {
+        return this.width * this.heigth;
+    }
+
+    /** 
+     * Switches a cell from dead to alive or alive to dead.
+     */
+    toggleCell(x:number, y:number) {
+        let index = this.getIndex(x, y);
+        this.data[index] = !this.data[index];
+    }
     /**
      * Returns whether the cell at the given coordinate is alive (true) or dead (false).
      */
@@ -108,8 +119,8 @@ export class Board {
      * of 1 are considered legal.
      */
     private getIndex(x:number, y:number):number {
-        let modX = this.getFlippedCoordinate(x, this.width);
-        let modY = this.getFlippedCoordinate(y, this.heigth);
+        let modX = this.getFlippedCoordinate(x, this.width, 'x');
+        let modY = this.getFlippedCoordinate(y, this.heigth, 'y');
         return modY * this.width + modX;
     }
 
@@ -125,17 +136,14 @@ export class Board {
      * [4 5 6]
      * [7 8 9]
      */
-    private getFlippedCoordinate(coordinate:number, max:number):number {
+    private getFlippedCoordinate(coordinate:number, max:number, axis:string):number {
         let flipped = coordinate;
         if (coordinate == -1)
             flipped = this.width - 1;
         else if (coordinate == max)
             flipped = 0;
         else if (coordinate > max || coordinate<-1)
-            throw Error("Invalid coordinate index: " + coordinate + ". Max is: " + max);
+            throw Error("Invalid " + axis + " coordinate index: " + coordinate + ". Max is: " + max);
         return flipped;
     }
-
-
-
 }

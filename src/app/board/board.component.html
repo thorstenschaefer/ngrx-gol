@@ -4,7 +4,7 @@
 
 <svg [attr.width]="size * 50 + 10" [attr.height]="size * 30 + 10">
   <g transform="translate(5,5)">
-    <rect *ngFor="let cell of board?.getAllCells()"
+    <rect *ngFor="let cell of (board | async)?.getAllCells()"
       class="cell"
       [attr.width]="size" [attr.height]="size" 
       [attr.x]="cell.x * size"

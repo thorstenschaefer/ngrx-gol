@@ -2,4 +2,8 @@
   {{title}}
 </h1>
 
-<app-board (clickedCell)="handleCellSelection($event)"></app-board>
+<button (click)="resetBoard()">Reset</button>
+<button (click)="createNextGeneration()">Next Generation</button>
+<button (click)="populate()">Populate</button>
+
+<app-board [board]="board$" (clickedCell)="handleCellSelection($event)"></app-board>
