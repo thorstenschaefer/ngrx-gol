@@ -42,14 +42,15 @@ export class AppComponent {
     // let x = Observable.from([1,2,3,4,5,6]);
     // x.bufferCount(2,1).subscribe(v => console.log('buffer ', v));
 
-
+    this.board$.subscribe(b => console.log('received board change', Date.now()));
   }
 
   handleCellSelection(cell) {
     this.store.dispatch( { type: TOGGLE_CELL, payload: { x: cell.x, y:cell.y} })
   }
 
-  createNextGeneration(cell) {
+  createNextGeneration() {
+    console.log('received click ', Date.now());
     this.store.dispatch( { type: NEXT_GENERATION } );
   }
 

@@ -18,7 +18,7 @@ export class BoardComponent implements OnInit {
 
   @Output()
   clickedCell = new EventEmitter<Cell>();
-  
+
   size = 15;
 
 
@@ -37,10 +37,18 @@ export class BoardComponent implements OnInit {
 
 
   ngOnInit() {
+    /*
+     * This observable triggers only in case of changes to the board structure, i.e.,
+     * width or height. This way, we don't recreate the DOM elements each time
+     * a cell changes but the board dimensions are the same. 
+     */
     this.dimensions = this.board
       .distinctUntilChanged((board1, board2) => board1.height == board2.height && board1.width == board2.width);
 
-    this.board.subscribe(board => this.b = board);
+    this.board.subscribe(board => { 
+      this.b = board;
+      console.log('Updated board array', Date.now());
+    });
 
     this.dimensions.subscribe(dim => console.log('dim changed', dim));
 
