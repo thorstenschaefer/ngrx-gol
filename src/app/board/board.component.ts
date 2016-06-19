@@ -9,7 +9,7 @@ import { Board, Cell } from '../model/board';
   selector: 'app-board',
   templateUrl: 'board.component.html',
   styleUrls: ['board.component.css'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BoardComponent implements OnInit {
 
@@ -21,9 +21,6 @@ export class BoardComponent implements OnInit {
 
   size = 15;
 
-
-  b:Board;
-
   private dimensions:Observable<any>;
 
   constructor() {
@@ -32,9 +29,6 @@ export class BoardComponent implements OnInit {
   onClick(cell:Cell) {
     this.clickedCell.emit(cell);
   }
-
-//      [class.alive]="(board | async).getCell(cell.x, cell.y)"
-
 
   ngOnInit() {
     /*
@@ -46,7 +40,7 @@ export class BoardComponent implements OnInit {
       .distinctUntilChanged((board1, board2) => board1.height == board2.height && board1.width == board2.width);
 
     this.board.subscribe(board => { 
-      this.b = board;
+      // this.b = board;
       console.log('Updated board array', Date.now());
     });
 

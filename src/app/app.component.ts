@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
@@ -10,20 +10,18 @@ import { RESET, TOGGLE_CELL, NEXT_GENERATION, POPULATE } from './reducers/board.
 
 interface AppState {
   board: Board;
+  settings: any;
 }
-
-
 
 @Component({
   moduleId: module.id,
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
-  directives: [BoardComponent]
+  directives: [BoardComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
-
-  title = 'app works!';
 
   board$:Observable<any>;
   // boardDimensions$:Observable<any>;

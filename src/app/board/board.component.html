@@ -7,7 +7,7 @@
       [attr.width]="size" [attr.height]="size" 
       [attr.x]="cell.x * size"
       [attr.y]="cell.y * size"
-      [class.alive]="b.getCell(cell.x, cell.y)"
+      [class.alive]="(board | async)?.getCell(cell.x, cell.y)"
       (click)="onClick(cell)"
      >
     </rect>
