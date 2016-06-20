@@ -3,11 +3,14 @@
 </h1>
 
 <div>
-Number of cells: {{ (board$ | async).getNumberOfAliveCells()}}
+  Number of cells: {{ (board$ | async).getNumberOfAliveCells()}}
+  
+</div>
 
-<button (click)="resetBoard()">Reset</button>
-<button (click)="createNextGeneration()">Next Generation</button>
-<button (click)="populate()">Populate</button>
+<div>
+  <button (click)="resetBoard()">Reset</button>
+  <button (click)="createNextGeneration()">Next Generation</button>
+  <button (click)="populate()">Populate</button>
 </div>
 
 <app-board [board]="board$" (clickedCell)="handleCellSelection($event)"></app-board>

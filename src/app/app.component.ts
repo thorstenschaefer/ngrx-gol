@@ -29,6 +29,10 @@ export class AppComponent {
   constructor(public store: Store<AppState>) {
     this.store.subscribe(s => console.log('state changed: ', s));
     this.board$ = this.store.select('board');
+
+
+
+
     // this.boardDimensions$ = this.board$
     //   .map(board => { 
     //     return { 'width': board.width, 'height': board.heigth } 
@@ -40,7 +44,6 @@ export class AppComponent {
     // let x = Observable.from([1,2,3,4,5,6]);
     // x.bufferCount(2,1).subscribe(v => console.log('buffer ', v));
 
-    this.board$.subscribe(b => console.log('received board change', Date.now()));
   }
 
   handleCellSelection(cell) {
@@ -48,7 +51,6 @@ export class AppComponent {
   }
 
   createNextGeneration() {
-    console.log('received click ', Date.now());
     this.store.dispatch( { type: NEXT_GENERATION } );
   }
 

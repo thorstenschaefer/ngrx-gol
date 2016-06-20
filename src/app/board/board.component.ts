@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -11,13 +11,13 @@ import { Board, Cell } from '../model/board';
   styleUrls: ['board.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent {
 
   @Input()
   board:Observable<Board>;
 
   @Output()
-  clickedCell = new EventEmitter<Cell>();
+  clickedCell = new EventEmitter<any>();
 
   size = 15;
 
@@ -26,26 +26,7 @@ export class BoardComponent implements OnInit {
   constructor() {
   }
 
-  onClick(cell:Cell) {
-    this.clickedCell.emit(cell);
+  onClick(x: number, y:number) {
+    this.clickedCell.emit({ 'x': x, 'y':y });
   }
-
-  ngOnInit() {
-    /*
-     * This observable triggers only in case of changes to the board structure, i.e.,
-     * width or height. This way, we don't recreate the DOM elements each time
-     * a cell changes but the board dimensions are the same. 
-     */
-    this.dimensions = this.board
-      .distinctUntilChanged((board1, board2) => board1.height == board2.height && board1.width == board2.width);
-
-    this.board.subscribe(board => { 
-      // this.b = board;
-      console.log('Updated board array', Date.now());
-    });
-
-    this.dimensions.subscribe(dim => console.log('dim changed', dim));
-
-  }
-
 }

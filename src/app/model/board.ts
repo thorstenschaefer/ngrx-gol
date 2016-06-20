@@ -1,7 +1,8 @@
 export interface Cell {
     x:number,
     y:number,
-    alive:boolean
+    alive:boolean,
+    index:number
 }
 
 export class Board {
@@ -9,18 +10,24 @@ export class Board {
     /**
      * Internal representation of all cells.
      */
-    private data:boolean[];
+    data:boolean[][];
 
     constructor(public width:number, public height:number) {
-        this.data = new Array<boolean>(this.width * this.height);
-        this.data.fill(false);
+        this.data = [];
+        for (let x = 0; x< width; x++) {
+            let row = [];
+            for (let y = 0; y<height; y++) {
+                row.push(false);
+            }
+            this.data.push(row);
+        }
     }
 
     /**
      * Sets the cell at the given coordinates to be alive (true) or dead (false).
      */
-    setCell(x:number, y:number, value:boolean) {
-        this.data[this.getIndex(x,y)] = value;
+    public setCell(x:number, y:number, value:boolean) {
+        this.data[x][y] = value;
     }
 
     getSize():number {
@@ -31,14 +38,16 @@ export class Board {
      * Switches a cell from dead to alive or alive to dead.
      */
     toggleCell(x:number, y:number) {
-        let index = this.getIndex(x, y);
-        this.data[index] = !this.data[index];
+        this.data[x][y] = !this.data[x][y];
     }
+
     /**
      * Returns whether the cell at the given coordinate is alive (true) or dead (false).
      */
     getCell(x:number, y:number):boolean {
-        return this.data[this.getIndex(x,y)];
+        let modX = this.getFlippedCoordinate(x, this.width, 'x');
+        let modY = this.getFlippedCoordinate(y, this.height, 'y');
+        return this.data[modX][modY];
     }
 
     /**
@@ -58,22 +67,12 @@ export class Board {
     }
 
     getNumberOfAliveCells():number {
-        return this.data.filter(cell => cell).length;
-    }
-
-    getAllCells():Cell[] {
-        let allCells = [];
-        for (let x = 0; x < this.width; x++) {
-            for (let y = 0; y < this.height; y ++) {
-                allCells.push({ 
-                    'index': this.getIndex(x,y),
-                    'x': x, 
-                    'y': y, 
-                    'alive': this.getCell(x, y)
-                })
-            }
-        }
-        return allCells;
+        let aliveCells = 0;
+        for (let x = 0; x< this.width; x++)
+            for (let y=0; y<this.height; y++)
+                if (this.data[x][y])
+                    aliveCells += 1;
+        return aliveCells;
     }
 
     /**
@@ -111,26 +110,8 @@ export class Board {
      */
     clone():Board {
         let clone = new Board(this.width, this.height);
-        clone.setData(this.data.slice(0));
+        clone.data = JSON.parse(JSON.stringify(this.data));
         return clone;
-    }
-
-    /**
-     * Sets the internal data array. This is only used for the clone method.
-     */
-    private setData(data:boolean[]) {
-        this.data = data;
-    }
-
-    /**
-     * Returns the index in the data array of a cell given x and y coordinates.
-     * Border cells are handled, but only the cells out of bounds by a distance
-     * of 1 are considered legal.
-     */
-    private getIndex(x:number, y:number):number {
-        let modX = this.getFlippedCoordinate(x, this.width, 'x');
-        let modY = this.getFlippedCoordinate(y, this.height, 'y');
-        return modY * this.width + modX;
     }
 
     /**

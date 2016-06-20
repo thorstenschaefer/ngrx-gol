@@ -1,15 +1,17 @@
 <svg [attr.width]="size * 50 + 10" [attr.height]="size * 30 + 10">
   <g transform="translate(5,5)">
-    <rect *ngFor="let cell of (dimensions | async)?.getAllCells()"
-      class="cell"
-      [attr.id]="'cell' + cell.index"
-      [attr.index]="cell.index"
-      [attr.width]="size" [attr.height]="size" 
-      [attr.x]="cell.x * size"
-      [attr.y]="cell.y * size"
-      [class.alive]="(board | async)?.getCell(cell.x, cell.y)"
-      (click)="onClick(cell)"
-     >
-    </rect>
+
+    <g *ngFor="let row of (board | async)?.data; let x = index">
+        <rect *ngFor="let cell of row; let y = index"
+          class="cell"
+          [attr.width]="size" [attr.height]="size" 
+          [attr.x]="x * size"
+          [attr.y]="y * size"
+          [class.alive]="cell"
+          (click)="onClick(x, y)"
+        >
+        </rect>
+    </g>
+
   </g>
 </svg>
