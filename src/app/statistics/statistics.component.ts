@@ -18,9 +18,11 @@ export class StatisticsComponent implements OnInit {
   board:Observable<Board>;
 
   @Input()
-  generation:Observable<Board>;
+  generation:Observable<number>;
 
   status:Observable<String>;
+
+  highscore:Observable<number>;
 
   ngOnInit() {
     this.status = this.board.bufferCount(2, 1)
@@ -34,7 +36,9 @@ export class StatisticsComponent implements OnInit {
         else
           return 'Cell development in progress...';
       })
-      .startWith('No alive cells')
+      .startWith('No alive cells');
+
+    this.highscore = this.generation.scan((a, b) => Math.max(a,b), 0);
   }
 
 }
