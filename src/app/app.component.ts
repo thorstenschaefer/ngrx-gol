@@ -11,6 +11,7 @@ import { RESET, TOGGLE_CELL, NEXT_GENERATION, POPULATE } from './reducers/board.
 interface AppState {
   board: Board;
   settings: any;
+  generation: number;
 }
 
 @Component({
@@ -24,11 +25,13 @@ interface AppState {
 export class AppComponent {
 
   board$:Observable<any>;
+  generation$:Observable<number>;
   // boardDimensions$:Observable<any>;
 
   constructor(public store: Store<AppState>) {
     this.store.subscribe(s => console.log('state changed: ', s));
     this.board$ = this.store.select('board');
+    this.generation$ = <Observable<number>> this.store.select('generation');
 
 
 
