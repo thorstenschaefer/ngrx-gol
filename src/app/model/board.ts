@@ -30,10 +30,6 @@ export class Board {
         this.data[x][y] = value;
     }
 
-    getSize():number {
-        return this.width * this.height;
-    }
-
     /** 
      * Switches a cell from dead to alive or alive to dead.
      */

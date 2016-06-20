@@ -2,7 +2,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
-// import 'rxjs/add/operator/distinctUntilChanged';
 
 import { BoardComponent } from './board';
 import { Board } from './model/board';
@@ -24,29 +23,14 @@ interface AppState {
 })
 export class AppComponent {
 
-  board$:Observable<any>;
+  board$:Observable<Board>;
   generation$:Observable<number>;
-  // boardDimensions$:Observable<any>;
+  empty$:Observable<boolean>;
 
   constructor(public store: Store<AppState>) {
-    this.store.subscribe(s => console.log('state changed: ', s));
-    this.board$ = this.store.select('board');
+    this.board$ = <Observable<Board>> this.store.select('board');
     this.generation$ = <Observable<number>> this.store.select('generation');
-
-
-
-
-    // this.boardDimensions$ = this.board$
-    //   .map(board => { 
-    //     return { 'width': board.width, 'height': board.heigth } 
-    //   })
-    //   .distinctUntilChanged((dim1, dim2) => dim1.height == dim2.height && dim1.width == dim2.width);
-
-
-      // can be used to detect non-changing boards...
-    // let x = Observable.from([1,2,3,4,5,6]);
-    // x.bufferCount(2,1).subscribe(v => console.log('buffer ', v));
-
+    this.empty$ = this.board$.map(board => board.getNumberOfAliveCells() == 0);
   }
 
   handleCellSelection(cell) {

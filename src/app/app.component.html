@@ -8,8 +8,8 @@
 </div>
 
 <div>
-  <button (click)="resetBoard()">Reset</button>
-  <button (click)="createNextGeneration()">Next Generation</button>
+  <button [disabled]="empty$ | async" (click)="resetBoard()">Reset</button>
+  <button [disabled]="empty$ | async" (click)="createNextGeneration()">Next Generation</button>
   <button (click)="populate()">Populate</button>
 </div>
 

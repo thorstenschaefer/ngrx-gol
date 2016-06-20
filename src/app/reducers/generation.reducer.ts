@@ -2,7 +2,7 @@ import { ActionReducer, Action } from '@ngrx/store';
 
 import { RESET, TOGGLE_CELL, NEXT_GENERATION, POPULATE } from './board.reducer';
 
-export const generationCountReducer: ActionReducer<number> = (state: number = 0, action: Action) => {
+export const generationReducer: ActionReducer<number> = (state: number = 0, action: Action) => {
 
     switch (action.type) {
         case POPULATE:
