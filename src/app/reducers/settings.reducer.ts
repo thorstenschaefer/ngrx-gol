@@ -1,6 +1,6 @@
 import { ActionReducer, Action } from '@ngrx/store';
 
-import { Settings } from '../model/settings';
+import { Settings } from '../model';
 
 export const RESET = 'RESET'; // no params
 

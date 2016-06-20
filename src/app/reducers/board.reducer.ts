@@ -1,6 +1,6 @@
 import { ActionReducer, Action } from '@ngrx/store';
 
-import { Board } from '../model/board';
+import { Board } from '../model';
 
 export const RESET = 'RESET'; // no params
 export const TOGGLE_CELL = 'TOGGLE_CELL'; // x, y
@@ -13,7 +13,7 @@ const DEFAULT_BOARD = new Board(50,30);
 export const boardReducer: ActionReducer<Board> = (state: Board = DEFAULT_BOARD.clone(), action: Action) => {
 
     switch (action.type) {
-        
+
         case POPULATE: {
             let board = DEFAULT_BOARD.clone();
             for (let x = 0; x < 50; x++) {

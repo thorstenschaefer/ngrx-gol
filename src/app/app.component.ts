@@ -6,9 +6,7 @@ import 'rxjs/Rx';
 import { BoardComponent } from './board';
 import { StatisticsComponent } from './statistics';
 
-import { State } from './model/state';
-import { Board } from './model/board';
-import { Settings } from './model/settings';
+import { Board, Settings, State } from './model';
 import { RESET, TOGGLE_CELL, NEXT_GENERATION, POPULATE } from './reducers/board.reducer';
 
 

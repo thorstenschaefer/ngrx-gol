@@ -55,6 +55,19 @@ export class Board {
         return neighbors;
     }
 
+    equals(other:Board):boolean {
+        if (this.width != other.width || this.height != other.height)
+            return false;
+
+        for (let x = 0; x<this.width; x++) {
+            for (let y = 0; y<this.height; y++) {
+                if (this.data[x][y] != other.data[x][y])
+                    return false;
+            }
+        }
+        return true;
+    } 
+
     getNumberOfAliveCells():number {
         let aliveCells = 0;
         for (let x = 0; x< this.width; x++)

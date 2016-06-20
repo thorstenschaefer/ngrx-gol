@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
 
 import { Observable } from 'rxjs/Observable';
 
-import { Board } from '../model/board';
+import { Board } from '../model';
 
 @Component({
   moduleId: module.id,
