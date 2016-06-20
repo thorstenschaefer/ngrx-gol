@@ -1,0 +1,12 @@
+<table class="table table-striped">
+  <tbody>
+    <tr>
+      <td>Number of cells</td>
+      <td class="text-right">{{ (board | async).getNumberOfAliveCells()}}</td>
+    </tr>
+    <tr>
+      <td>Generation</td>
+      <td class="text-right">{{ (generation | async)}}</td>
+    </tr>
+  </tbody>
+</table>

@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
 
 import { Observable } from 'rxjs/Observable';
 
-import { Board, Cell } from '../model/board';
+import { Board } from '../model/board';
 
 @Component({
   moduleId: module.id,
@@ -19,7 +19,7 @@ export class BoardComponent {
   @Output()
   clickedCell = new EventEmitter<any>();
 
-  size = 15;
+  size = 20;
 
   private dimensions:Observable<any>;
 
