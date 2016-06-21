@@ -1,0 +1,20 @@
+<table class="table table-striped">
+  <tbody>
+    <tr>
+      <td>Number of cells</td>
+      <td class="text-right">{{ (board | async).getNumberOfAliveCells()}}</td>
+    </tr>
+    <tr>
+      <td>Generation</td>
+      <td class="text-right">{{ (generation | async)}}</td>
+    </tr>
+    <tr>
+      <td>Status</td>
+      <td class="text-right">{{ (status | async)}}</td>
+    </tr>
+    <tr>
+      <td>Highscore</td>
+      <td class="text-right">{{ (highscore | async)}}</td>
+    </tr>
+  </tbody>
+</table>

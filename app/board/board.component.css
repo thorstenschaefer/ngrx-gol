@@ -1,0 +1,9 @@
+.cell {
+ stroke:#666;
+ stroke-width:2;
+ /*fill:lightgray*/
+}
+
+.cell.alive {
+ /*fill:red*/
+}

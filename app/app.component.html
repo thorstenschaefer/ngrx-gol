@@ -1,0 +1,41 @@
+<div class="container">
+
+  <h1 class="text-center">
+    Game of Life
+  </h1>
+
+  <p>
+    Reactive implementation of <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" target="_blank">Conway's Game of Life</a>. 
+    Users can generate a seed configuration automatically by using a the populate button which assigns alive cells randomly,
+    or create their own seed by clicking at a cell. Each new generation is computed following these rules:
+  </p>
+  <ol>
+    <li>Any live cell with fewer than two live neighbours dies, as if caused by under-population.</li>
+    <li>Any live cell with two or three live neighbours lives on to the next generation.</li>
+    <li>Any live cell with more than three live neighbours dies, as if by over-population.</li>
+    <li>Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.</li>
+  </ol>
+  <p>
+    The implementation does not use any component state. Instead, all data is stored in a central ngrx-store and components are reactive,
+    i.e., their only input are RxJS observables. The source code can be found at <a href="https://github.com/thorstenschaefer/ngrx-gol" target="_blank">Github</a>.
+  </p>
+
+  <div class="row">
+    <div class="col-md-4">
+      <app-statistics [board]="board$" [generation]="generation$"></app-statistics>
+    </div>
+    <div class="col-md-4">
+      <app-controller></app-controller>
+    </div>
+    <div class="col-md-4">
+      <app-settings></app-settings>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="cold-md-12 text-center">
+      <app-board [board]="board$" [color]="color$" (clickedCell)="handleCellSelection($event)"></app-board>
+    </div>
+  </div>
+
+</div>
