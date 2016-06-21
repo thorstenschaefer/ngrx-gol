@@ -4,18 +4,19 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 import { BoardComponent } from './board';
+import { ControllerComponent } from './controller';
 import { SettingsComponent } from './settings';
 import { StatisticsComponent } from './statistics';
 
 import { Board, Settings, State } from './model';
-import { RESET, TOGGLE_CELL, NEXT_GENERATION, POPULATE } from './reducers/board.reducer';
+import { TOGGLE_CELL } from './reducers/board.reducer';
 
 
 @Component({
   moduleId: module.id,
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  directives: [BoardComponent, SettingsComponent, StatisticsComponent],
+  directives: [BoardComponent, ControllerComponent, SettingsComponent, StatisticsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
@@ -38,17 +39,6 @@ export class AppComponent {
     this.store.dispatch( { type: TOGGLE_CELL, payload: { x: cell.x, y:cell.y} })
   }
 
-  createNextGeneration() {
-    this.store.dispatch( { type: NEXT_GENERATION } );
-  }
-
-  populate() {
-    this.store.dispatch( { type: POPULATE, payload: { density: 0.3 } } );
-  }
-
-  resetBoard() {
-    this.store.dispatch({ type: RESET });
-  }
 }
 
 

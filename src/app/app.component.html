@@ -25,9 +25,7 @@
       <app-statistics [board]="board$" [generation]="generation$"></app-statistics>
     </div>
     <div class="col-md-4">
-      <button class="btn btn-primary btn-block" [disabled]="empty$ | async" (click)="resetBoard()">Reset</button>
-      <button class="btn btn-primary btn-block" [disabled]="empty$ | async" (click)="createNextGeneration()">Next Generation</button>
-      <button class="btn btn-primary btn-block" (click)="populate()">Populate</button>
+      <app-controller></app-controller>
     </div>
     <div class="col-md-4">
       <app-settings></app-settings>

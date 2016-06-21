@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs/Observable';
@@ -11,7 +11,7 @@ import { RESET_SETTINGS, CHANGE_SETTINGS } from '../reducers/settings.reducer';
   selector: 'app-settings',
   templateUrl: 'settings.component.html'
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent {
 
   private color:Observable<String>;
   private density:Observable<number>;
@@ -20,12 +20,6 @@ export class SettingsComponent implements OnInit {
     let settings = <Observable<Settings>> this.store.select('settings');
     this.color = settings.map(settings => settings.color);
     this.density = settings.map(settings => settings.populationDensity);
-
-    this.density.subscribe(d => console.log('dnesity chg',d));
-  }
-
-  ngOnInit() {
-    this.color.subscribe(c => console.log('color change', c));
   }
 
   resetSettings() {
