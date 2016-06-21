@@ -9,7 +9,7 @@ import { SettingsComponent } from './settings';
 import { StatisticsComponent } from './statistics';
 
 import { Board, Settings, State } from './model';
-import { TOGGLE_CELL } from './reducers/board.reducer';
+import { TOGGLE_CELL, NEXT_GENERATION } from './reducers/board.reducer';
 
 
 @Component({
@@ -33,6 +33,13 @@ export class AppComponent {
     this.settings$ = <Observable<Settings>> this.store.select('settings');
     this.color$ = this.settings$.map(settings => settings.color).distinctUntilChanged();
     this.empty$ = this.board$.map(board => board.getNumberOfAliveCells() == 0);
+
+    let running = <Observable<boolean>> this.store.select('running');
+    let timer = Observable.timer(0, 250);
+    Observable.combineLatest(running, timer)
+      .filter(value => value[0] == true)
+      .map(value => value[1])
+      .subscribe(tick => this.store.dispatch( { type: NEXT_GENERATION }));
   }
 
   handleCellSelection(cell) {

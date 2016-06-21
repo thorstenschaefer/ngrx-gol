@@ -6,12 +6,13 @@ import { AppComponent, environment } from './app/';
 import { boardReducer } from './app/reducers/board.reducer';
 import { generationReducer } from './app/reducers/generation.reducer';
 import { settingsReducer } from './app/reducers/settings.reducer';
+import { runningReducer } from './app/reducers/running.reducer';
 
 if (environment.production) {
   enableProdMode();
 }
 
 bootstrap(AppComponent, [
-    provideStore({ board: boardReducer, settings: settingsReducer, generation: generationReducer })  
+    provideStore({ board: boardReducer, settings: settingsReducer, generation: generationReducer, running: runningReducer })  
 ]);
 

@@ -5,4 +5,5 @@ export interface State {
   board: Board;
   settings: Settings;
   generation: number;
+  running: boolean;
 }
