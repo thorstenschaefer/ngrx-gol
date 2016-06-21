@@ -1,0 +1,13 @@
+<form>
+  <fieldset class="form-group">
+    <label for="color">Cell color</label>
+    <input type="color" #colorPicker class="form-control" id="color" (input)="changeColor(colorPicker.value)" [value]="color | async">
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="density">Population density (in percent)</label>
+    <input type="number" min="10" max="90" step="10" #densityRange class="form-control" id="color" (input)="changeDensity(densityRange.value)" [value]="density | async">
+  </fieldset>
+  <fieldset class="form-group">
+    <button class="btn btn-primary" (click)="resetSettings()">Default settings</button>
+  </fieldset>
+</form>

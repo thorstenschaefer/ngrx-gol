@@ -1,4 +1,5 @@
 export interface Settings {
     populationDensity:number,
-    animationSpeed:number
+    animationSpeed:number,
+    color:string
 }

@@ -21,19 +21,22 @@
   </p>
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <app-statistics [board]="board$" [generation]="generation$"></app-statistics>
     </div>
-    <div class="col-md-6">
-      <button class="btn btn-info" [disabled]="empty$ | async" (click)="resetBoard()">Reset</button>
-      <button class="btn btn-info" [disabled]="empty$ | async" (click)="createNextGeneration()">Next Generation</button>
-      <button class="btn btn-info" (click)="populate()">Populate</button>
+    <div class="col-md-4">
+      <button class="btn btn-primary btn-block" [disabled]="empty$ | async" (click)="resetBoard()">Reset</button>
+      <button class="btn btn-primary btn-block" [disabled]="empty$ | async" (click)="createNextGeneration()">Next Generation</button>
+      <button class="btn btn-primary btn-block" (click)="populate()">Populate</button>
+    </div>
+    <div class="col-md-4">
+      <app-settings></app-settings>
     </div>
   </div>
 
   <div class="row">
     <div class="cold-md-12 text-center">
-      <app-board [board]="board$" (clickedCell)="handleCellSelection($event)"></app-board>
+      <app-board [board]="board$" [color]="color$" (clickedCell)="handleCellSelection($event)"></app-board>
     </div>
   </div>
 

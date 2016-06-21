@@ -16,6 +16,9 @@ export class BoardComponent {
   @Input()
   board:Observable<Board>;
 
+  @Input()
+  color:Observable<String>;
+
   @Output()
   clickedCell = new EventEmitter<any>();
 

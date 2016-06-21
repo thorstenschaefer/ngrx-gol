@@ -7,7 +7,7 @@
           [attr.width]="size" [attr.height]="size" 
           [attr.x]="x * size"
           [attr.y]="y * size"
-          [class.alive]="cell"
+          [ngStyle]="{ 'fill' : (cell ? (color | async) : 'lightgray') }"
           (click)="onClick(x, y)"
         >
         </rect>
