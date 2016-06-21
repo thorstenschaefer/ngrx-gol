@@ -6,7 +6,6 @@ export const RESET_SETTINGS = 'RESET_SETTINGS'; // no params
 export const CHANGE_SETTINGS = 'CHANGE_SETTINGS'; // name and value
 
 const DEFAULT_SETTINGS:Settings = {
-    animationSpeed : 1,
     populationDensity: 40,
     color: '#ff0000'
 }
